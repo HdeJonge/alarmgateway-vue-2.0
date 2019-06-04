@@ -1,0 +1,26 @@
+<template>
+  <v-app>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-2 col-md-8 col-md-offset-3">
+                <h1>BproBeheer</h1>
+                <hr>
+                <app-header></app-header>
+                <router-view></router-view>
+            </div>
+        </div>
+    </div>
+  </v-app>
+</template>
+
+<script>
+import Header from './components/Header.vue';
+    export default {
+        components:{
+            appHeader: Header
+        }
+    }
+</script>
+
+<style>
+</style>
