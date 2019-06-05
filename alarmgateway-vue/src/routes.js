@@ -14,40 +14,52 @@ import LocationList from './components/location/LocationList.vue';
 import LocationEdit from './components/location/LocationEdit.vue';
 import LocationDetails from './components/location/LocationDetails.vue';
 import LocationAdd from './components/location/LocationAdd.vue';
-import Datatable from './components/data/Datatable.vue';
-import Datatable2 from './components/data/Datatable2.vue';
 import AlarmgatewayVueDt from './components/data/AlarmgatewayVueDt.vue';
-import AlarmgatewayJsDt from './components/data/AlarmgatewayJsDt.vue';
 import AlarmgatewayVuePage from './components/data/AlarmgatewayVuePage.vue';
+import User from './components/user/User.vue';
+import UserList from './components/user/UserList.vue';
 
 
 export const routes = [
   { path: '', component: Home },
+  {
+    path: "/user",
+    name:"user",
+    component: User,
+    children: [
+      {
+        path: '',
+        component: UserList
+      }
+    ]
+  },
   /* LABEL ROUTES */
   {
     path: "/label",
     name: "label",
     component: Label,
     children: [
-      {path: '',
-      component: LabelList},
+      {
+        path: '',
+        component: LabelList
+      },
       {
         path: "add-label",
         name: "label-add",
         component: LabelAdd,
-        props:true
+        props: true
       },
       {
         path: "label/:id/edit",
         name: "label-edit",
         component: LabelEdit,
-        props:true
+        props: true
       },
       {
         path: "label/:id",
         name: "label-details",
         component: LabelDetails,
-        props:true
+        props: true
       }
     ]
   },
@@ -110,29 +122,14 @@ export const routes = [
     ]
   },
   {
-      path: "/datatables",
-      name: "datable",
-      component: Datatable,
-  },
-  {
-      path: "/alarmgatewayVueDt",
-      name: "alarmgatewayVueDt",
-      component: AlarmgatewayVueDt,
+    path: "/alarmgatewayVueDt",
+    name: "alarmgatewayVueDt",
+    component: AlarmgatewayVueDt,
   },
   {
     path: "/alarmgatewayVuePage",
     name: "alarmgatewayVuePage",
     component: AlarmgatewayVuePage,
-},
-  {
-      path: "/alarmgatewayJsDt",
-      name: "alarmgatewayJsDt",
-      component: AlarmgatewayJsDt,
-  },
-  {
-      path: "/datatables2",
-      name: "datable2",
-      component: Datatable2,
   }
-  
+
 ];

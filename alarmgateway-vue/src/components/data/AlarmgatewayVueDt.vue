@@ -23,6 +23,29 @@
       <template v-slot:items="props">
         <td>{{ props.item.id }}</td>
         <td class="text-xs-left">{{ props.item.mac }}</td>
+        <td>
+          <router-link
+            class="btn btn-info"
+            :to="{ 
+                  name: 'gateway-details',
+                  params: { 
+                    alarmgateway: props.item, 
+                    id: props.item.id 
+                    }
+                  }"
+          >view</router-link>
+          <router-link
+            class="btn btn-warning"
+            :to="{ 
+                  name: 'gateway-edit',
+                  params: { 
+                    alarmgateway: props.item, 
+                    id: props.item.id 
+                    }
+                  }"
+          >edit</router-link>
+          <button class="btn btn-danger" @click="deleteAlarmgateway(gateway.id)">delete</button>
+        </td>
       </template>
     </v-data-table>
   </div>
@@ -34,14 +57,14 @@ export default {
   data() {
     return {
       total: 100,
-      columns:["id", "mac"],
+      columns: ["id", "mac"],
       desserts: [],
       gateways: [],
       search: "",
       loading: true,
       pagination: { rowsPerPage: 10 },
       rowsPerPageItems: [10, 20, 50, 100],
-      headers: [{ text: "id", value: "id" }, { text: "mac", value: "mac" }]
+      headers: [{ text: "id", value: "id" }, { text: "mac", value: "mac" },{}]
     };
   },
   watch: {
