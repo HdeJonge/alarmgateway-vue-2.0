@@ -22,26 +22,29 @@ import com.example.demo.constraints.SpecificationsBuilder;
 public class OnzeDataTablesRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID>
 		implements OnzeDataTablesRepository<T, ID> {
 
-
 	public OnzeDataTablesRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
 		super(entityInformation, entityManager);
 	}
+	@Override
+	
+	public Page<T> findAll(OnzeDataTableRequest input) {
+		return findAll(input, null);
+	}
 
 	@Override
-	public Page<T> findAll(OnzeDataTableRequest input) {
+	public Page<T> findAll(OnzeDataTableRequest input, Specification<T> additionalSpecification) {
 		SpecificationsBuilder builder = new SpecificationsBuilder(input.getColumns(), input.getSearch());
 		Specification<T> result = builder
 				.build(searchCriteria -> new BproSpecification<T>((SearchCriteria) searchCriteria));
 
 		Pageable page = null;
-		if(input.getDirection()==null) {
-			page= PageRequest.of(input.getPage()-1, input.getSize());
-		}else {
-			//Direction dir = input.isDesc() ? Direction.DESC : Direction.ASC;
+		if (input.getDirection() == null) {
+			page = PageRequest.of(input.getPage() - 1, input.getSize());
+		} else {
 			Direction dir = input.getDirection();
 			Sort sort = Sort.by(new Sort.Order(dir, input.getSortBy()));
-			page = PageRequest.of(input.getPage()-1, input.getSize(), sort);
+			page = PageRequest.of(input.getPage() - 1, input.getSize(), sort);
 		}
-		return findAll(result,page);
+		return findAll(result.and(additionalSpecification), page);
 	}
 }

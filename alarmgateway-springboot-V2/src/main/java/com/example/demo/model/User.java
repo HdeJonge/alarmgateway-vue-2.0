@@ -10,6 +10,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 @Table(name = "user")
@@ -21,7 +23,10 @@ public class User {
 
 	private String userName;
 	private String firstName;
+	@NotEmpty
+	@NotNull
 	private String lastName;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date birthDay;
 	
 	public Long getId() {

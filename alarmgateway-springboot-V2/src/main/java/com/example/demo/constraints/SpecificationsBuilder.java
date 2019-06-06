@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.example.demo.model.Alarmgateway;
@@ -15,10 +16,18 @@ public class SpecificationsBuilder {
     public SpecificationsBuilder() {
         params = new ArrayList<SearchCriteria>();
     }
+    //witout operator (in case of datatables)
     public SpecificationsBuilder(String[] columns, String search) {
     	params = new ArrayList<SearchCriteria>();
         for (int i = 0; i < columns.length; i++) {
 		    params.add(new SearchCriteria(columns[i], ":", search));
+	    }
+    }
+    //with operator
+    public SpecificationsBuilder(String[] columns, String operator, String search) {
+    	params = new ArrayList<SearchCriteria>();
+        for (int i = 0; i < columns.length; i++) {
+		    params.add(new SearchCriteria(columns[i], operator, search));
 	    }
     }
     public SpecificationsBuilder with(String key, String operation, Object value) {

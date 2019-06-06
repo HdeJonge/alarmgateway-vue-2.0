@@ -1,9 +1,15 @@
 <template>
   <div>
     <h4>User List</h4>
-    <router-link tag="button" to="/gateway/add-gateway" class="btn btn-primary">
+    <router-link tag="button" to="/user/add-user" class="btn btn-primary">
       <span class="glyphicon glyphicon-plus"></span> Add user
     </router-link>
+    <hr>
+    <label for="from">from</label>
+    <input id="from"  @input="retrieveUsers" type="date" v-model="from"/>
+    <label for="to">to </label>
+    <input id="to"  @input="retrieveUsers" type="date" v-model="to"/>
+    <hr>
     <v-text-field @input="retrieveUsers" label="search" v-model="search"></v-text-field>
     <v-data-table
       :headers="headers"
@@ -23,15 +29,14 @@
     </v-data-table>
   </div>
 </template>
-    </v-data-table>
-  </div>
-</template>
 
 <script>
 export default {
   name: "datable1",
   data() {
     return {
+      from: new Date().toISOString().substr(0, 10),
+      to: new Date().toISOString().substr(0, 10),
       resource: {},
       total: 100,
       columns: ["id"],
@@ -40,17 +45,16 @@ export default {
       loading: true,
       pagination: { rowsPerPage: 10 },
       rowsPerPageItems: [10, 20, 50, 100],
-      headers: [{ text: "id", value: "id" }, { text: "first name" },{},{}]
+      headers: [{ text: "id", value: "id" }, { text: "first name" }, {}, {}]
     };
   },
   watch: {
     pagination: {
       handler() {
-        console.log("pag");
         this.retrieveUsers();
       },
       deep: true
-    }
+    },
   },
   mounted() {
     console.log("mount");
@@ -68,7 +72,9 @@ export default {
             sortBy: this.pagination.sortBy,
             page: this.pagination.page,
             size: this.pagination.rowsPerPage,
-            columns: ["id", "firstName"]
+            columns: ["id", "firstName"],
+            from:this.from,
+            to:this.to
           }
         })
         .then(res => {

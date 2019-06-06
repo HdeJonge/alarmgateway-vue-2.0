@@ -18,6 +18,7 @@ import AlarmgatewayVueDt from './components/data/AlarmgatewayVueDt.vue';
 import AlarmgatewayVuePage from './components/data/AlarmgatewayVuePage.vue';
 import User from './components/user/User.vue';
 import UserList from './components/user/UserList.vue';
+import UserAdd from './components/user/UserAdd.vue';
 
 
 export const routes = [
@@ -30,7 +31,13 @@ export const routes = [
       {
         path: '',
         component: UserList
-      }
+      },
+      {
+        path: "add-user",
+        name: "user-add",
+        component: UserAdd,
+        props: true
+      },
     ]
   },
   /* LABEL ROUTES */

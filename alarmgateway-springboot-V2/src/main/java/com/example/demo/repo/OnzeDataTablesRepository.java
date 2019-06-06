@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -17,6 +18,8 @@ public interface OnzeDataTablesRepository<T, ID extends Serializable>
 		extends PagingAndSortingRepository<T, ID>, JpaSpecificationExecutor<T> {
 
 	Page<T> findAll(OnzeDataTableRequest input);
+	
+	Page<T> findAll(OnzeDataTableRequest input, Specification<T> additionalSpecification);
 
 
 //	/**
