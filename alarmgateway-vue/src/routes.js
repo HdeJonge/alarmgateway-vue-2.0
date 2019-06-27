@@ -19,10 +19,18 @@ import AlarmgatewayVuePage from './components/data/AlarmgatewayVuePage.vue';
 import User from './components/user/User.vue';
 import UserList from './components/user/UserList.vue';
 import UserAdd from './components/user/UserAdd.vue';
+import Charts from './components/user/Charts.vue';
+import websocket from './components/websocket/websocket.vue';
 
 
 export const routes = [
   { path: '', component: Home },
+  { path: '/websocket', component: websocket },
+  {
+    path: "/charts",
+    name:"charts",
+    component: Charts,
+  },
   {
     path: "/user",
     name:"user",

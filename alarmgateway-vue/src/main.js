@@ -30,7 +30,10 @@ const router = new VueRouter({
   mode:'history' // google vue-router (geen 3 in link)
 })
 
+export const eventBus = new Vue();
+
 new Vue({
   render: h => h(App),
   router,
 }).$mount('#app')
+
